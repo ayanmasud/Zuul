@@ -8,15 +8,23 @@
 using namespace std;
 
 room::room() {
-  
+
 }
-void room::setExit(char direction[6], room neighbor) {
-  exits.insert(pair<char, room>(direction, neighbor));
+void room::setExit(char direction, room* neighbor) { // sets exits for a room
+  exits.insert(pair<char, room*>(direction, neighbor));
 }
-void room::getDescription() {
+void room::getDescription() { // print information about the room you're in
   cout << "You are " << description << endl << endl;
-  cout << "Exits: " << endl << endl; //figure out maps
-  cout << "Items in the room: " << endl;
+
+  map<char, room*>::iterator it = exits.begin(); // prints the exits for the room
+  cout << "Exits: " << endl;
+  while (it != exits.end()) {
+    cout << it->second->name << " is '" << it->first << "'" << endl;
+    ++it;
+  }
+  cout << endl;
+
+  cout << "Items in the room: " << endl; // prints the items inside the room
   if (hasItem1) {
     cout << "Item 1" << endl;
   }
