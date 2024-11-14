@@ -14,7 +14,7 @@ void room::setExit(char direction, room* neighbor) { // sets exits for a room
   exits.insert(pair<char, room*>(direction, neighbor));
 }
 void room::getDescription() { // print information about the room you're in
-  cout << "You are " << description << endl << endl;
+  cout << endl << "You are " << description << endl << endl;
 
   map<char, room*>::iterator it = exits.begin(); // prints the exits for the room
   cout << "Exits: " << endl;
@@ -26,21 +26,58 @@ void room::getDescription() { // print information about the room you're in
 
   cout << "Items in the room: " << endl; // prints the items inside the room
   if (hasItem1) {
-    cout << "Item 1" << endl;
+    cout << "Spoon" << endl;
   }
   if (hasItem2) {
-    cout << "item 2" << endl;
+    cout << "Toilet Paper" << endl;
   }
   if (hasItem3) {
-    cout << "item 3" << endl;
+    cout << "Photo of Ehan" << endl;
   }
   if (hasItem4) {
-    cout << "item 4" << endl;
+    cout << "Phone" << endl;
   }
   if (hasItem5) {
-    cout << "item 5" << endl;
+    cout << "Car Keys" << endl;
   }
   cout << endl;
+}
+room* room::getExit(char direction) {
+  if (exits.find(direction) != exits.end()) { // checks to see if this direction exists in the map
+    return exits[direction];
+  }
+  else { // direction inputted isnt in the map
+    cout << "Direction does not exist in this room" << endl;
+  }
+  return this;
+}
+bool room::getItem(int id) {
+  if (id == 1 && hasItem1 == true) {
+    cout << "You picked up a spoon." << endl;
+    hasItem1 == false;
+    return true;
+  }
+  if (id == 2 && hasItem2 == true) {
+    cout << "You picked up toilet paper." << endl;
+    hasItem2 == false;
+    return true;
+  }
+  if (id == 3 && hasItem3 == true) {
+    cout << "You picked up a photo of Ehan." << endl;
+    hasItem3 == false;
+    return true;
+  }
+  if (id == 4 && hasItem4 == true) {
+    cout << "You picked up a phone." << endl;
+    hasItem4 == false;
+    return true;
+  }
+  if (id == 5 && hasItem5 == true) {
+    cout << "You picked up a car keys." << endl;
+    hasItem5 == false;
+    return true;
+  }
+  return false;
 }
 
 #endif
