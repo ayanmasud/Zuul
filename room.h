@@ -18,4 +18,6 @@ class room {
   room();
   void setExit(char direction, room* neighbor);
   void getDescription();
+  room* getExit(char direction);
+  bool getItem(int id);
 };
