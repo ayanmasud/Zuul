@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// this file carries the functions that the room types can do
 room::room() {
 
 }
@@ -44,14 +45,14 @@ void room::getDescription() { // print information about the room you're in
 }
 room* room::getExit(char direction) {
   if (exits.find(direction) != exits.end()) { // checks to see if this direction exists in the map
-    return exits[direction];
+    return exits[direction]; // returns that exit so that the current room can turn into it
   }
   else { // direction inputted isnt in the map
     cout << "Direction does not exist in this room" << endl;
   }
-  return this;
+  return this; // since we have to return something if the direction inputted doesnt exist, we return this room which it already is
 }
-bool room::getItem(int id) {
+bool room::getItem(int id) { // after recieving the id of the item being picked up, it will check if the room has that item and if it does, you picked it up!
   if (id == 1 && hasItem1 == true) {
     cout << "You picked up a spoon." << endl;
     hasItem1 == false;
