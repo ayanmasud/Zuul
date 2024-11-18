@@ -40,9 +40,9 @@ int main() {
   bool playing = true;
   while(playing == true) {
 
-    char cmd[8];
+    char cmd[10];
     cout << endl << "Command: ";
-    cin.getline(cmd, 8);
+    cin.getline(cmd, 10);
 
     if (strcmp(cmd, "go") == 0) { // go command
       cout << "Where? ";
@@ -106,17 +106,84 @@ int main() {
           else {
             cout << "This room does not have this item." << endl;
           }
+          currentroom->getDescription(); // shows the description again because it got updated
         }
       }
     }
     else if (strcmp(cmd, "drop") == 0) {
+      cout << "What? ";
+      char item[15];
+      cin.getline(item, 15);
 
+      vector<room*>::iterator it;
+      //cout << "cr: " << currentroom->name;
+      for (it = rooms.begin(); it < rooms.end(); it++) {
+        //cout << (*it)->name << endl;
+        if (strcmp((*it)->name, currentroom->name) == 0) { // we need to run an iterator through the vector of rooms to figure out which room in the vector we are in. that way, we can actually change the room instead of the variable holding the current room
+          //cout << "through";
+          if (strcmp(item, "Spoon") == 0) {
+            if (hasItem1 == true) { // you have spoon
+              hasItem1 = false;
+              currentroom->hasItem1 = true;
+              (*it)->hasItem1 = true;
+            }
+          }
+          else if (strcmp(item, "Toilet Paper") == 0) {
+            if (hasItem2 == true) { // room has spoon
+              hasItem2 = false;
+              currentroom->hasItem2 = true;
+              (*it)->hasItem2 = true;
+            }
+          }
+          else if (strcmp(item, "Photo of Ehan") == 0) {
+            if (hasItem3 == true) { // room has spoon
+              hasItem3 = false;
+              currentroom->hasItem3 = true;
+              (*it)->hasItem3 = true;
+            }
+          }
+          else if (strcmp(item, "Phone") == 0) {
+            if (hasItem4 == true) { // room has spoon
+              hasItem4 = false;
+              currentroom->hasItem4 = true;
+              (*it)->hasItem4 = true;
+            }
+          }
+          else if (strcmp(item, "Car Keys") == 0) {
+            if (hasItem5 == true) { // room has spoon
+              hasItem5 = false;
+              currentroom->hasItem5 = true;
+              (*it)->hasItem5 = true;
+            }
+          }
+          else {
+            cout << "You do not have this item." << endl;
+          }
+          currentroom->getDescription(); // shows the description again because it got updated
+        }
+      }
     }
     else if (strcmp(cmd, "inventory") == 0) {
-
+      cout << endl << "Inventory:" << endl;
+      if (hasItem1 == true) {
+        cout << "Spoon" << endl;
+      }
+      if (hasItem2 == true) {
+        cout << "Toilet Paper" << endl;
+      }
+      if (hasItem3 == true) {
+        cout << "Photo of Ehan" << endl;
+      }
+      if (hasItem4 == true) {
+        cout << "Phone" << endl;
+      }
+      if (hasItem5 == true) {
+        cout << "Car Keys" << endl;
+      }
+      cout << endl;
     }
     else if (strcmp(cmd, "help") == 0) {
-
+      cout << endl << "Possible commands:" << endl << "go -> n,s,e,w" << endl << "quit" << endl << "help" << endl << "inventory" << endl << "get -> item name" << endl << "drop -> item name" << endl << endl;
     }
     else if (strcmp(cmd, "quit") == 0) { // quit command
       break;
